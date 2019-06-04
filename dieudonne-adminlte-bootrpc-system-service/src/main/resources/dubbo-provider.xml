@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="dieudonne-adminlte-bootrpc-system-service"/>
+    <dubbo:registry  address="zookeeper://127.0.0.1:2181"/>
+    <dubbo:protocol name="dubbo" port="20880"/>
+
+    <dubbo:service interface="com.dieudonne.adminlte.bootrpc.system.service.ISysDeptService" ref="deptService"/>
+    <dubbo:service interface="com.dieudonne.adminlte.bootrpc.system.service.ISysLogService" ref="logService"/>
+    <dubbo:service interface="com.dieudonne.adminlte.bootrpc.system.service.ISysMenuService" ref="menuService"/>
+    <dubbo:service interface="com.dieudonne.adminlte.bootrpc.system.service.ISysRoleMenuService" ref="roleMenuService"/>
+    <dubbo:service interface="com.dieudonne.adminlte.bootrpc.system.service.ISysRoleService" ref="roleService"/>
+    <dubbo:service interface="com.dieudonne.adminlte.bootrpc.system.service.ISysSettingService" ref="settingService"/>
+    <dubbo:service interface="com.dieudonne.adminlte.bootrpc.system.service.ISysUserRoleService" ref="userRoleService"/>
+    <dubbo:service interface="com.dieudonne.adminlte.bootrpc.system.service.ISysUserService" ref="userService"/>
+    <dubbo:service interface="com.dieudonne.adminlte.bootrpc.system.service.IAppNewsService" ref="appNewsService"/>
+
+</beans>

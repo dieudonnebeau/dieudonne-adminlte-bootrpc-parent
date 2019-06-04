@@ -1,0 +1,22 @@
+<#include "/common/layout_dl.html">
+<@header>
+</@header>
+<@body>
+ <form role="form" class="layui-form layui-form-pane pd10" method="post" action="/system/dept/doAdd">
+   <div class="box-body">
+     <div class="form-group">
+       <label for="deptName">Nom</label>
+      	<input type="text" id="deptName" name="deptname" class="form-control" lay-verify="required"  placeholder="Entrez le nom du département">
+     </div>
+     <div class="form-group">
+            <label>Description</label>
+            <textarea class="form-control" name="deptdesc" rows="3" placeholder="Veuillez entrer dans la description, jusqu’à 300 caractères ..." ></textarea>
+     </div>
+     <div class="form-group">
+   		<button type="submit" class="btn btn-success" lay-submit lay-filter="submit"><i class="fa fa-save"></i>Enregistrer </button>
+   	 </div>
+   </div>
+ </form>
+</@body>
+<@footer>
+</@footer>

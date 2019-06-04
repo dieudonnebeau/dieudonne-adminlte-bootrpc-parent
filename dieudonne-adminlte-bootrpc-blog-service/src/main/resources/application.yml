@@ -1,0 +1,91 @@
+server:
+  port: 9193
+  session-timeout: 120
+# ======================= undertow 配置开始   =========================
+# 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+# 不要设置过大，如果过大，启动项目会报错：打开文件数过多
+  undertow: 
+    io-threads: 16
+# 阻塞任务线程池, 当执行类似servlet请求阻塞IO操作, undertow会从这个线程池中取得线程
+# 它的值设置取决于系统线程执行任务的阻塞系数，默认值是IO线程数*8
+    worker-threads: 256
+# 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+# 每块buffer的空间大小,越小的空间被利用越充分，不要设置太大，以免影响其他应用，合适即可
+    buffer-size: 1024
+# 每个区分配的buffer数量 , 所以pool的大小是buffer-size * buffers-per-region
+#   buffers-per-region: 1024
+# 是否分配的直接内存(NIO直接分配的堆外内存)
+    direct-buffers: true
+# ======================= undertow 配置开始   =========================
+
+spring:
+  application:
+    name: dieudonne-adminlte-bootrpc-blog-service
+  datasource:
+        name: db
+        minIdle: 5
+        maxActive: 100
+        initialSize: 10
+        maxWait: 60000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 'x'
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 50
+        removeAbandoned: true
+        filters: stat  
+
+#数据源名称
+jdbc: 
+  datasources: ds,ds1,ds2
+#主数据源，默认的
+  ds: 
+    dsType: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/adminlte-admin?useSSL=false
+    username: root
+    password: root
+
+#从数据源1
+  ds1: 
+    dsType: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/adminlte-admin?useSSL=false
+    username: root
+    password: root
+
+#从数据源2(远程数据源)
+  ds2: 
+    dsType: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/adminlte-admin?useSSL=false
+    username: root
+    password: root
+      
+logging:
+  level:
+    root: INFO
+    org.mybatis: INFO
+    com.dieudonne.adminlte.blog: DEBUG
+
+
+mybatis: 
+  type-aliases-package: com.dieudonne.adminlte.model.blog
+  mapper-locations: classpath:mybatis/AppBlog*.xml
+  configuration:
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
+mapper: 
+  mappers: com.dieudonne.adminlte.common.mapper.dao.BaseMapper
+  not-empty: false
+  identity: MYSQL
+     
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count\=countSql

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dieudonne.adminlte.system.mapper.SysSettingMapper" >
+  <resultMap id="BaseResultMap" type="com.dieudonne.adminlte.model.system.SysSetting" >
+    <id column="Id" property="id" jdbcType="VARCHAR" />
+    <result column="sysKey" property="syskey" jdbcType="VARCHAR" />
+    <result column="sysName" property="sysname" jdbcType="VARCHAR" />
+    <result column="sysValue" property="sysvalue" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="sysDesc" property="sysdesc" jdbcType="VARCHAR" />
+  </resultMap>
+ 
+</mapper>

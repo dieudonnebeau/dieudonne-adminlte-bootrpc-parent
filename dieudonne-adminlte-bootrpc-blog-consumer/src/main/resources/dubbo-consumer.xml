@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    
+    <dubbo:application name="dieudonne-adminlte-bootrpc-blog-consumer"/>
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+    <dubbo:reference id="appBlogService" interface="com.dieudonne.adminlte.bootrpc.blog.service.IAppBlogService" check="false"/>
+    <dubbo:reference id="appBlogCommentService" interface="com.dieudonne.adminlte.bootrpc.blog.service.IAppBlogCommentService" check="false"/>
+    <dubbo:reference id="appBlogCatalogService" interface="com.dieudonne.adminlte.bootrpc.blog.service.IAppBlogCatalogService"  check="false"/>
+    <dubbo:reference id="appBlogVoteService" interface="com.dieudonne.adminlte.bootrpc.blog.service.IAppBlogVoteService" check="false"/>
+    
+    
+    <dubbo:reference id="esBlogService" interface="com.dieudonne.adminlte.bootrpc.elasticsearh.service.EsBlogService" check="false"/>
+</beans>

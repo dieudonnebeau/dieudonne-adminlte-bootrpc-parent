@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dieudonne.adminlte.system.mapper.SysRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.dieudonne.adminlte.model.system.SysRole" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="roleName" property="rolename" jdbcType="VARCHAR" />
+    <result column="roleDesc" property="roledesc" jdbcType="VARCHAR" />
+    <result column="roleState" property="rolestate" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+</mapper>

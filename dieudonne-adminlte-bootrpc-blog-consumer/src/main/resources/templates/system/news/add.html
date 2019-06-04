@@ -1,0 +1,72 @@
+<#include "/common/layout_dl.html">
+<@header>
+</@header>
+<@body>
+ <form role="form" class="layui-form layui-form-pane pd10" method="post" action="/system/app-news/doAdd" onsubmit="return submitForm();">
+   <div class="box-body">
+     <div class="form-group">
+       <label for="newsTitle">Title</label>
+      	<input type="text" id="title" name="title" class="form-control" lay-verify="required"  placeholder="Entrez le title">
+     </div>
+     <div class="form-group">
+       <label>Sous-Title</label>
+      	<input type="text" id="subtitle" name="subtitle" class="form-control" lay-verify="required"  placeholder="Entrez le sous-title">
+     </div>
+     <div class="form-group">
+       <label>Redacteur</label>
+      	<input type="text" id="authorId" name="authorId" class="form-control" lay-verify="required"  placeholder="Entrez le ID du redacteur">
+     </div>
+      <div class="form-group">
+       <label>Category</label>
+      	<input type="text" id="classifyId" name="classifyId" class="form-control" lay-verify="required"  placeholder="Entrez le ID du categorie">
+     </div>
+     <div class="form-group">
+       <label>Type</label>
+      	<input type="text" id="typeId" name="typeId" class="form-control" lay-verify="required"  placeholder="Entrez le ID du Type">
+     </div>
+     <div class="form-group">
+            <label>Resume</label>
+            <textarea class="form-control" name="sammary" rows="3" lay-verify="required" placeholder="Veuillez entrer le resume de l'actualite, jusqu’à 300 caractères ..." ></textarea>
+     </div>
+     <div class="form-group">
+      	
+     <input type="hidden" id="content" name="content">
+     <div class="form-group">
+       <label>Contenu</label>
+       <script id="editor" type="text/plain" style="width: 100%; height: 550px;"></script>
+     </div>
+     <div class="form-group">
+       <label>Lien</label>
+      	<input type="text" id="link" name="link" class="form-control" lay-verify="required"  placeholder="Entrez le lien">
+     </div>
+     <div class="form-group">
+       <label>Image Couverture</label>
+      	<input type="text" id="coverImage" name="coverImage" class="form-control" lay-verify="required"  placeholder="Entrez l'image pour couverture">
+     </div>
+     <div class="form-group">
+   		<button type="submit" class="btn btn-success"><i class="fa fa-save"></i>Enregistrer </button>
+   	 </div>
+   </div>
+ </form>
+</@body>
+<@footer>
+<script type="text/javascript">
+	//实例化编辑器
+	//建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+	var ue = UE.getEditor('editor');
+	
+	//提交表单contenu
+	function submitForm(){
+		if (!UE.getEditor('editor').hasContents()){
+			alert('Entrez le contenu du Journal!');
+			return false;
+			}else{
+				$("#content").val(UE.getEditor('editor').getContent());
+				// 关闭当前frame
+				parent.layer.closeAll('iframe');
+				parent.location.reload();
+				return true;
+			}
+	}
+</script>
+</@footer>

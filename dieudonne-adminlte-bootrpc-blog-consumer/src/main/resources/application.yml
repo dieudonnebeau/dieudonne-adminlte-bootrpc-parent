@@ -1,0 +1,52 @@
+server:
+  port: 8182
+  session-timeout: 120
+# ======================= undertow 配置开始   =========================
+# 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+# 不要设置过大，如果过大，启动项目会报错：打开文件数过多
+#  undertow: 
+#    io-threads: 16
+# 阻塞任务线程池, 当执行类似servlet请求阻塞IO操作, undertow会从这个线程池中取得线程
+# 它的值设置取决于系统线程执行任务的阻塞系数，默认值是IO线程数*8
+#    worker-threads: 256
+# 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+# 每块buffer的空间大小,越小的空间被利用越充分，不要设置太大，以免影响其他应用，合适即可
+#    buffer-size: 1024
+# 每个区分配的buffer数量 , 所以pool的大小是buffer-size * buffers-per-region
+#    buffers-per-region: 1024
+# 是否分配的直接内存(NIO直接分配的堆外内存)
+#    direct-buffers: true
+# ======================= undertow 配置开始   =========================
+
+#thymeleaf start
+logging:
+  level:
+    root: INFO
+    com.dieudonne.adminlte.bootrpc.blog: INFO
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+  application:
+    name: dieudonne-adminlte-bootrpc-blog-consumer
+  freemarker:
+       prefix: .html
+       content-type: text/html 
+       expose-spring-macro-helpers: false
+       expose-session-attributes: false
+       expose-request-attributes: false
+       templateLoaderPath : classpath:/templates/
+       settings:
+          classic_compatible: true
+          template_update_delay: 0
+          default_encoding: UTF-8
+          number_format: 0
+          datetime_format: 0.##########
+          template_exception_handler: ignore 
+
+ue:
+  config-file: static/ueditor/jsp/config.json #resources目录下配置文件的位置
+  server-url: /ueditor.do #服务器统一请求接口路径
+  url-prefix: /file/ #"/"结尾
+  physical-path: C:/upload/ #存储文件的绝对路径 必须使用标准路径"/"作为分隔符 默认为"/"即当前项目所在磁盘根目录  
+      

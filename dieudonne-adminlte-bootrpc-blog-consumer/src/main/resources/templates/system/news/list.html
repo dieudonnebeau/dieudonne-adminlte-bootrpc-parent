@@ -1,0 +1,98 @@
+<#include "/common/layout.html">
+<@header>
+</@header>
+<@body>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      <small>Gestion Système > Actualités</small>
+    </h1>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <!-- Your Page Content Here -->
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+         <form action="/system/app-news/list/1" method="post" class="form-inline">
+          <div class="box-header">
+            <@shiro.hasPermission name="addNews">
+	            <div class="input-group">
+	            	<a class="btn btn-primary dialog" href="javascript:;" data-title="Nouveau Actualité" data-url="/system/app-news/add" data-width="1000" data-height="600"><i class="fa fa-plus"></i> Nouveau Actualité</a>
+	            </div>
+            </@shiro.hasPermission>
+             <div class="input-group">
+               <input type="text" name="search" value="${search!}" class="form-control" placeholder="Search">
+               <div class="input-group-btn">
+                 <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                 <a href="/system/app-news/list/1" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+               </div>
+            </div>
+            <div class="input-group pull-right">
+                 <button type="button" class="btn btn-primary btn-flat" onclick="exportTo('Liste de l'actualités');"><i class="fa fa-file-excel-o"></i> Export </button>
+            </div>
+          </div><!-- /.box-header -->
+          </form>
+          <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+              <tr>
+                <th  width="100px">Numéro</th>
+                <th>Couverture</th>
+                <th>Title</th>
+                <th>Sous title</th>
+                <th>Auteur</th>
+                <th>Category</th>
+                <th>Type</th>
+                <th>Resume</th>
+                <th>Lien</th>
+                <th>Lecteurs</th>
+                <th>State</th>
+                <th width="120px">Opération</th>
+              </tr>
+              <#list pageData.getRows() as news>
+              	  <tr>
+	                <td>${((pageData.pageNo-1)*pageData.size +news_index+1)!}</td>
+	                <td>${(news.coverImage)!}</td>
+	                <td>${(news.title)!'--'}</td>
+	                <td>${(news.subtitle)!}</td>
+	                <td>${(news.authorId)!'--'}</td>
+	                <td>${(news.classifyId)!}</td>
+	                <td>${(news.typeId)!'--'}</td>
+	                <td>${(news.sammary)!}</td>
+	                <td>${(news.link)!'--'}</td>
+	                <td>${(news.readNumber)!}</td>
+	                <td>${(news.state)!}</td>
+	                <td>
+	                	<@shiro.hasPermission name="editNews">
+	                		<a class="btn btn-primary btn-xs dialog" href="javascript:;" data-title="Éditer" data-url="/system/app-news/edit/${(news.id)!}",data-width="800" data-height="400" > <i class="fa fa-pencil-square-o"></i> Modifier </a>
+	                	</@shiro.hasPermission>
+	                	<@shiro.hasPermission name="deleteNews">
+		                	<a class="btn btn-danger btn-xs"
+		                	 data-tiggle="ajax"
+		                	 data-submit-url="/system/app-news/delete?id=${(news.id)!}"
+		                	 data-confirm="Etes-vous sûr supprimer cet article?"><i class="fa fa-times"></i> Supprimer</a>
+	                	 </@shiro.hasPermission>
+	                </td>
+	              </tr>
+              </#list>
+            </table>
+          </div><!-- /.box-body -->
+          <div class="box-footer row">
+            <div class="col-md-6">
+         	  <#include "/common/paginateBar.html" />
+	  		  <@paginate pageData=pageData actionUrl="/system/app-news/list/" urlParas="?search=${search!}"  />
+            </div>
+            <div class="col-md-6 pull-left">
+	             <#include "/common/paginate.html" />
+	  			 <@paginate currentPage=pageData.getPageNo() totalPage=pageData.getPages() actionUrl="/system/app-news/list/" urlParas="?search=${search!}&pageSize=${pageSize!}"  />
+            </div>
+          </div>
+        </div><!-- /.box -->
+      </div>
+    </div>
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
+</@body>
+<@footer>
+</@footer>

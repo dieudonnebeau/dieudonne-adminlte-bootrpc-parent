@@ -1,0 +1,20 @@
+<#include "/common/layout.html">
+<@header>
+</@header>
+<@body>
+<div class="content-wrapper">
+  <!-- Main content -->
+  <section class="content">
+    <div class="error-page">
+       <div>
+        <h2 class="headline text-yellow">  <i class="fa fa-warning text-yellow"></i> Accès illégal</h2>
+        <p> Adresse des ressources est : <a href="${url!}">${url!}</a>.
+        <p> Vous n’avez pas accès, vous pouvez cliquer ici<a href="/index">Retour à la page d’accueil</a>Ou réactualiser la page！
+        </p>
+      </div><!-- /.error-content -->
+    </div><!-- /.error-page -->
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
+</@body>
+<@footer>
+</@footer>

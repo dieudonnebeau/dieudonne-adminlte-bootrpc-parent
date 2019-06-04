@@ -1,0 +1,45 @@
+<#include "/common/layout_dl.html">
+<@header>
+</@header>
+<@body>
+ <form role="form" class="layui-form layui-form-pane" method="post" action="/system/menu/doEdit">
+  <input type="hidden" name="id" value="${(sysMenu.id)!}" />
+  <div class="box-body">
+       <div class="form-group">
+          <label>Menu Parent</label>
+          <select name="pid" class="form-control select2" style="width: 100%;" lay-verify="required" lay-ignore>
+            <#list list as m>
+              <option value="${(m.id)!}" ${(m.id==sysMenu.pid)?string('selected="selected"','')} > ${(m.code)!}-${(m.menuname)!}</option>
+            </#list>
+          </select>
+        </div><!-- /.form-group -->
+        <div class="form-group">
+	       <label for="uname">Code</label>
+	       <input type="text" name="code" class="form-control" 
+	      	value="${(sysMenu.code)!}"	placeholder="Entrez le code,ex:05" lay-verify="required">
+     </div>
+  	 <div class="form-group">
+       <label for="uname">Nom</label>
+      	<input type="text" name="menuname" value="${(sysMenu.menuname)!}" class="form-control" placeholder="Entrez le nom"  lay-verify="required">
+     </div>
+     <div class="form-group">
+       <label for="uname">URL</label>
+      	<input type="text" name="url" class="form-control" value="${(sysMenu.url)!}" placeholder="URL" lay-verify="required">
+     </div>
+     <div class="form-group">
+       <label for="uname">ordre</label>
+      	<input type="text" name="sort" class="form-control" value="${(sysMenu.sort)!}" placeholder="Entrez l'ordre"  lay-verify="required|number">
+     </div>  
+     <div class="form-group">
+       <label for="uname">Icone <i class="fa ${(sysMenu.icon)!}"></i></label>
+      	<input type="text" name="icon" class="form-control" value="${(sysMenu.icon)!}" placeholder="Entrez l'icone ex:fa-user" >
+     </div>
+      <div class="form-group">
+	    <button type="submit" class="btn btn-success" lay-submit lay-filter="submit"><i class="fa fa-save"></i>  Enregistrer</button>
+	    <a  class="btn btn-default" href="javascript:parent.layer.closeAll('iframe');"><i class="fa fa-close"></i>  Annuler</a>
+	  </div>
+  </div><!-- /.box-body -->
+</form>
+</@body>
+<@footer>
+</@footer>

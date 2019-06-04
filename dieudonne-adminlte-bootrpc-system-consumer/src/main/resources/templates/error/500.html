@@ -1,0 +1,23 @@
+<#include "/common/layout.html">
+<@header>
+</@header>
+<@body>
+<div class="content-wrapper">
+  <!-- Main content -->
+  <section class="content">
+    <div class="error-page">
+       <div>
+        <h2 class="headline text-yellow">  <i class="fa fa-warning text-yellow"></i> 500, Erreur du serveur.</h2>
+        <p> Désolé,il y a l'exception du serveur, vous pouvez cliquer ici <a href="/index">Retour à la page d’accueil</a>Ou réactualiser la page！
+        <p> Error:${error!}
+        </p>
+      </div><!-- /.error-content -->
+    </div><!-- /.error-page -->
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
+</@body>
+<@footer>
+</@footer>
+
+
+

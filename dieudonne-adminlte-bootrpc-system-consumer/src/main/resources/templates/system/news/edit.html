@@ -1,0 +1,85 @@
+<#include "/common/layout_dl.html">
+<@header>
+</@header>
+<@body>
+ <form role="form" class="layui-form layui-form-pane pd10" method="post" action="/system/app-news/doEdit" onsubmit="return submitForm();">
+   <input type="hidden" name="id"  value="${(appNews.id)!}">
+   <div class="box-body">
+     <div class="form-group">
+       <label for="newsTitle">Title</label>
+      	<input type="text" id="title" name="title" class="form-control" lay-verify="required"  placeholder="Entrez le title" value="${(appNews.title)!}">
+     </div>
+     <div class="form-group">
+       <label>Sous-Title</label>
+      	<input type="text" id="subtitle" name="subtitle" class="form-control" lay-verify="required"  placeholder="Entrez le sous-title" value="${(appNews.subtitle)!}">
+     </div>
+     <div class="form-group">
+       <label>Redacteur</label>
+      	<input type="text" id="authorId" name="authorId" class="form-control" lay-verify="required"  placeholder="Entrez le ID du redacteur" value="${(appNews.authorId)!}">
+     </div>
+      <div class="form-group">
+       <label>Category</label>
+      	<input type="text" id="classifyId" name="classifyId" class="form-control" lay-verify="required"  placeholder="Entrez le ID du categorie" value="${(appNews.classifyId)!}">
+     </div>
+     <div class="form-group">
+       <label>Type</label>
+      	<input type="text" id="typeId" name="typeId" class="form-control" lay-verify="required"  placeholder="Entrez le ID du Type" value="${(appNews.typeId)!}">
+     </div>
+     <div class="form-group">
+            <label>Resume</label>
+            <textarea class="form-control" name="sammary" rows="3" lay-verify="required" placeholder="Veuillez entrer le resume de l'actualite, jusqu’à 300 caractères ...">${(appNews.sammary)!}</textarea>
+     </div>
+     <div class="form-group">
+     <!-- 现将博文内容放到code中，然后ueditor再从这里取值 -->
+    <code id="contentHtml" style="display:none;">
+        ${(appNews.content)!}
+    </code>
+     <input type="hidden" id="content" name="content">
+     <div class="form-group">
+       <label>Contenu</label>
+       <script id="editor" type="text/plain" style="width: 100%; height: 550px;"></script>
+     </div>
+     <div class="form-group">
+       <label>Lien</label>
+      	<input type="text" id="link" name="link" class="form-control" lay-verify="required"  placeholder="Entrez le lien" value="${(appNews.link)!}">
+     </div>
+     <div class="form-group">
+       <label>Image Couverture</label>
+      	<input type="text" id="coverImage" name="coverImage" class="form-control" lay-verify="required"  placeholder="Entrez l'image pour couverture" value="${(appNews.coverImage)!}">
+     </div>
+     <div class="form-group">
+   		<button type="submit" class="btn btn-success"><i class="fa fa-save"></i>Enregistrer </button>
+   	 </div>
+   </div>
+ </form>
+</@body>
+<@footer>
+<script type="text/javascript">
+	//实例化编辑器
+	//建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+	var ue = UE.getEditor('editor');
+	
+	//判断ueditor 编辑器是否创建成功
+	UE.getEditor('editor').addListener("ready", function () {
+		var contentHtml = $("#contentHtml").html();
+	// editor准备好之后才可以使用
+	//UE.getEditor('editor').setContent(content);
+	alert(contentHtml);
+	UE.getEditor('editor').execCommand('insertHtml', contentHtml)
+	});
+	
+	//提交表单contenu
+	function submitForm(){
+		if (!UE.getEditor('editor').hasContents()){
+			alert('Entrez le contenu du Journal!');
+			return false;
+			}else{
+				$("#content").val(UE.getEditor('editor').getContent());
+				// 关闭当前frame
+				parent.layer.closeAll('iframe');
+				parent.location.reload();
+				return true;
+			}
+	}
+</script>
+</@footer>
