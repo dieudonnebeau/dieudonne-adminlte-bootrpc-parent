@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Id;
-
-import com.dieudonne.adminlte.model.common.SysUser;
-
 import lombok.Data;
 @Data
 public class AppBlog implements Serializable {

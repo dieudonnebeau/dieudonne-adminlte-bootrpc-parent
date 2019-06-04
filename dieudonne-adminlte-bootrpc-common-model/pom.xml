@@ -9,7 +9,7 @@
 	</parent>
 
 	<artifactId>dieudonne-adminlte-bootrpc-common-model</artifactId>
-	
+
 	<name>dieudonne-adminlte-bootrpc-common-model</name>
 	<packaging>jar</packaging>
 
@@ -20,10 +20,15 @@
 	</properties>
 
 	<dependencies>
-			<dependency>
-				<groupId>com.dieudonne.adminlte.system</groupId>
-				<artifactId>dieudonne-adminlte-bootrpc-common</artifactId>
-			</dependency>
+		<dependency>
+			<groupId>com.dieudonne.adminlte.system</groupId>
+			<artifactId>dieudonne-adminlte-bootrpc-common</artifactId>
+		</dependency>
+		<!--mapper -->
+		<dependency>
+			<groupId>tk.mybatis</groupId>
+			<artifactId>mapper-spring-boot-starter</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

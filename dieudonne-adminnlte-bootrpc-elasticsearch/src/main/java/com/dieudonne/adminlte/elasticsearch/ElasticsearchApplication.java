@@ -8,15 +8,17 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 
+
 @EnableConfigurationProperties
-@EnableAutoConfiguration
 // springboot启动
-@SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
+@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class}) 
+@SpringBootApplication
 @ComponentScan("com.dieudonne.adminlte.elasticsearch")
 @ImportResource("classpath:dubbo-es-provider.xml")
 public class ElasticsearchApplication {
+	
 
-	public static void main(String[] args) {
+	public static void main(String[] args) { 
 		SpringApplication.run(ElasticsearchApplication.class, args);
 	}
 }
