@@ -36,7 +36,7 @@
 		<module>dieudonne-adminlte-bootrpc-system-consumer</module>
 		<module>dieudonne-adminlte-bootrpc-blog-service</module>
 		<module>dieudonne-adminlte-bootrpc-blog-consumer</module>
-		<!-- <module>dieudonne-adminlte-bootrpc-system-mybatis-generator</module> -->
+		<module>dieudonne-adminlte-bootrpc-system-mybatis-generator</module>
 	</modules>
 	<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
 	<parent>
