@@ -22,8 +22,6 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.ResultsExtractor;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
-import org.springframework.stereotype.Service;
-
 import com.dieudonne.adminlte.bootrpc.elasticsearh.service.EsBlogService;
 import com.dieudonne.adminlte.bootrpc.elasticsearh.service.model.EsBlog;
 import com.dieudonne.adminlte.bootrpc.elasticsearh.service.vo.TagVO;
@@ -39,15 +37,13 @@ import com.dieudonne.adminlte.elasticsearch.repository.es.EsBlogRepository;
  * @Copyright: 2019 http://www.0731333.com Inc. All rights reserved. 
  * 注意：本内容仅限于湖南无为网电子商务有限公司内部传阅，禁止外泄以及用于其他的商业目
  */
-@Service(value = EsBlogServiceImpl.BEAN_NAME)
 public class EsBlogServiceImpl implements EsBlogService {
-	public final static String BEAN_NAME = "esBlogService";
 	@Autowired
 	private EsBlogRepository esBlogRepository;
 	@Autowired
 	private ElasticsearchTemplate elasticsearchTemplate;
 
-	private static final Pageable TOP_5_PAGEABLE = PageRequest.of(0, 5);
+//	private static final Pageable TOP_5_PAGEABLE = PageRequest.of(0, 5);
 	private static final String EMPTY_KEYWORD = "";
 
 	@Override
@@ -66,9 +62,11 @@ public class EsBlogServiceImpl implements EsBlogService {
 	}
 
 	@Override
-	public Page<EsBlog> listNewestEsBlogs(String keyword, Pageable pageable) throws SearchParseException {
+	public Page<EsBlog> listNewestEsBlogs(String keyword, int pageIndex, int pageSize, String direction) throws SearchParseException {
+		//Pageable pageable
 		Page<EsBlog> pages = null;
-		Sort sort = new Sort(Direction.DESC, "createTime");
+		Sort sort = new Sort(Direction.DESC,"createTime"); 
+        Pageable pageable = PageRequest.of(pageIndex, pageSize,  sort);
 		if (pageable.getSort().isUnsorted()) {
 			pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
 		}
@@ -80,9 +78,9 @@ public class EsBlogServiceImpl implements EsBlogService {
 	}
 
 	@Override
-	public Page<EsBlog> listHotestEsBlogs(String keyword, Pageable pageable) throws SearchParseException {
-
-		Sort sort = new Sort(Direction.DESC, "readSize", "commentSize", "voteSize", "createTime");
+	public Page<EsBlog> listHotestEsBlogs(String keyword, int pageIndex, int pageSize, String direction) throws SearchParseException {
+		 Sort sort = new Sort(Direction.DESC,"readSize","commentSize","voteSize","createTime"); 
+         Pageable pageable = PageRequest.of(pageIndex, pageSize, sort); //pageIndex,pageSize
 		if (pageable.getSort().isUnsorted()) {
 			pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
 		}
@@ -92,8 +90,11 @@ public class EsBlogServiceImpl implements EsBlogService {
 	}
 
 	@Override
-	public Page<EsBlog> listEsBlogs(Pageable pageable) {
-		return esBlogRepository.findAll(pageable);
+	public Page<EsBlog> listEsBlogs(int pageIndex, int pageSize) {
+		 Pageable pageable = PageRequest.of(pageIndex, pageSize);
+		 Page<EsBlog> page = esBlogRepository.findAll(pageable);
+		 System.out.println("page : "+page );
+		return page;
 	}
 
 	/**
@@ -104,7 +105,7 @@ public class EsBlogServiceImpl implements EsBlogService {
 	 */
 	@Override
 	public List<EsBlog> listTop5NewestEsBlogs() {
-		Page<EsBlog> page = this.listHotestEsBlogs(EMPTY_KEYWORD, TOP_5_PAGEABLE);
+		Page<EsBlog> page = this.listHotestEsBlogs(EMPTY_KEYWORD, 0,5,EMPTY_KEYWORD);
 		return page.getContent();
 	}
 
@@ -116,7 +117,7 @@ public class EsBlogServiceImpl implements EsBlogService {
 	 */
 	@Override
 	public List<EsBlog> listTop5HotestEsBlogs() {
-		Page<EsBlog> page = this.listHotestEsBlogs(EMPTY_KEYWORD, TOP_5_PAGEABLE);
+		Page<EsBlog> page = this.listHotestEsBlogs(EMPTY_KEYWORD, 0,5,EMPTY_KEYWORD);
 		return page.getContent();
 	}
 

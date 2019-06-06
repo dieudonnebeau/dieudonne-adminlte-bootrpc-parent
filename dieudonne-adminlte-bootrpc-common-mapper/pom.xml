@@ -22,6 +22,11 @@
 			<groupId>com.dieudonne.adminlte.system</groupId>
 			<artifactId>dieudonne-adminlte-bootrpc-common</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.dieudonne.adminlte.system</groupId>
+			<artifactId>dieudonne-adminlte-bootrpc-common-model</artifactId>
+		</dependency>
 		<!--mapper -->
 			<dependency>
 				<groupId>tk.mybatis</groupId>

@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dieudonne.adminlte.bootrpc.system.service.ISysUserService;
-import com.dieudonne.adminlte.common.mapper.model.SysUser;
 import com.dieudonne.adminlte.common.mapper.service.impl.BaseServiceImpl;
 import com.dieudonne.adminlte.common.mapper.util.PageUtil;
 import com.dieudonne.adminlte.common.mapper.util.ShiroUtil;
 import com.dieudonne.adminlte.common.util.CommonUtil;
+import com.dieudonne.adminlte.model.common.SysUser;
 import com.dieudonne.adminlte.model.system.SysUserRole;
 import com.dieudonne.adminlte.system.mapper.SysUserMapper;
 import com.dieudonne.adminlte.system.mapper.SysUserRoleMapper;

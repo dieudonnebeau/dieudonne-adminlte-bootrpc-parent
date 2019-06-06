@@ -4,10 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,24 +36,21 @@ public class BlogController {
             @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
             Model model) {
 
-        Page<EsBlog> page = null;
+    	Page<EsBlog> page = null;
         List<EsBlog> list = null;
         boolean isEmpty = true; // 系统初始化时，没有博客数据
         try {
             if (order.equals("hot")) { // 最热查询
-                Sort sort = new Sort(Direction.DESC,"readSize","commentSize","voteSize","createTime"); 
-                Pageable pageable = PageRequest.of(pageIndex, pageSize, sort);
-                page = esBlogService.listHotestEsBlogs(keyword, pageable);
+                page = esBlogService.listHotestEsBlogs(keyword, pageIndex, pageSize, "");
             } else if (order.equals("new")) { // 最新查询
-                Sort sort = new Sort(Direction.DESC,"createTime"); 
-                Pageable pageable = PageRequest.of(pageIndex, pageSize, sort);
-                page = esBlogService.listNewestEsBlogs(keyword, pageable);
+                
+                page = esBlogService.listNewestEsBlogs(keyword, pageIndex, pageSize, "");
             }
 
             isEmpty = false;
         } catch (Exception e) {
-            Pageable pageable = PageRequest.of(pageIndex, pageSize);
-            page = esBlogService.listEsBlogs(pageable);
+           
+            page = esBlogService.listEsBlogs(pageIndex, pageSize);
         }  
 
         list = page.getContent();   // 当前所在页面数据列表

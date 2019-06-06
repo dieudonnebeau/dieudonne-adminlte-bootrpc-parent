@@ -97,6 +97,7 @@ public class ShiroConfiguration {
         filterMap.put("/ueditor/**", "anon");
         filterMap.put("/login/doLogin", "anon");
         filterMap.put("/logout", "logout");
+        filterMap.put("/blogs/**", "anon");
         filterMap.put("/login", "anon");
         filterMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);

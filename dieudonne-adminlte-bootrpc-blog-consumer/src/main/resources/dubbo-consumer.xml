@@ -13,4 +13,10 @@
     
     
     <dubbo:reference id="esBlogService" interface="com.dieudonne.adminlte.bootrpc.elasticsearh.service.EsBlogService" check="false"/>
+    
+    <dubbo:reference id="userService" interface="com.dieudonne.adminlte.bootrpc.system.service.ISysUserService" check="false"/>
+    <dubbo:reference id="userRoleService" interface="com.dieudonne.adminlte.bootrpc.system.service.ISysUserRoleService" check="false"/>
+    <dubbo:reference id="roleMenuService" interface="com.dieudonne.adminlte.bootrpc.system.service.ISysRoleMenuService" check="false"/>
+    <dubbo:reference id="logService" interface="com.dieudonne.adminlte.bootrpc.system.service.ISysLogService" check="false"/>
+    <dubbo:reference id="menuService" interface="com.dieudonne.adminlte.bootrpc.system.service.ISysMenuService"  check="false"/>
 </beans>

@@ -7,8 +7,11 @@
 
     <dubbo:application name="dieudonne-adminlte-bootrpc-elasticsearch"/>
     <dubbo:registry  address="zookeeper://127.0.0.1:2181"/>
-    <dubbo:protocol name="dubbo" port="20882"/>
+    <dubbo:protocol name="dubbo" port="20883"  serialization="kryo"/>
 
+    <!-- 声明需要暴露的服务接口 -->
     <dubbo:service interface="com.dieudonne.adminlte.bootrpc.elasticsearh.service.EsBlogService" ref="esBlogService"/>
+    <!-- 和本地bean一样实现服务 -->
+    <bean id="esBlogService" class="com.dieudonne.adminlte.elasticsearch.service.EsBlogServiceImpl" />
 
 </beans>

@@ -4,8 +4,6 @@ package com.dieudonne.adminlte.bootrpc.elasticsearh.service;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
 import com.dieudonne.adminlte.bootrpc.elasticsearh.service.model.EsBlog;
 import com.dieudonne.adminlte.bootrpc.elasticsearh.service.vo.TagVO;
 
@@ -44,7 +42,7 @@ public interface EsBlogService {
 	 * @param pageable
 	 * @return
 	 */
-	Page<EsBlog> listNewestEsBlogs(String keyword, Pageable pageable);
+	Page<EsBlog> listNewestEsBlogs(String keyword,  int pageIndex, int pageSize, String direction);
  
 	/**
 	 * 最热博客列表，分页
@@ -52,14 +50,14 @@ public interface EsBlogService {
 	 * @param pageable
 	 * @return
 	 */
-	Page<EsBlog> listHotestEsBlogs(String keyword, Pageable pageable);
+	Page<EsBlog> listHotestEsBlogs(String keyword, int pageIndex, int pageSize, String direction);
 	
 	/**
 	 * 博客列表，分页
 	 * @param pageable
 	 * @return
 	 */
-	Page<EsBlog> listEsBlogs(Pageable pageable);
+	Page<EsBlog> listEsBlogs(int pageIndex, int pageSize);
 	/**
 	 * 最新前5
 	 * @param keyword

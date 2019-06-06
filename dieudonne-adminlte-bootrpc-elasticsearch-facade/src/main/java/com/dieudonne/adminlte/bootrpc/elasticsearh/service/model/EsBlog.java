@@ -11,6 +11,10 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 import com.dieudonne.adminlte.model.blog.AppBlog;
 import com.dieudonne.adminlte.model.common.SysUser;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 //import org.springframework.data.elasticsearch.annotations.Mapping;
 
 /**
@@ -21,6 +25,9 @@ import com.dieudonne.adminlte.model.common.SysUser;
  */
 @Document(indexName = "blog", type = "blog")
 //@Mapping(mappingPath = "blog_mapping.json")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class EsBlog implements Serializable {
  
 	private static final long serialVersionUID = 1L;
@@ -56,8 +63,8 @@ public class EsBlog implements Serializable {
 	@Field(type = FieldType.text,fielddata=true, searchAnalyzer = "ik_smart", analyzer = "ik_smart") 
 	private String tags;  // 标签
 
-	protected EsBlog() {  // JPA 的规范要求无参构造函数；设为 protected 防止直接使用 
-	}
+//	protected EsBlog() {  // JPA 的规范要求无参构造函数；设为 protected 防止直接使用 
+//	}
 
 	public EsBlog(Long blogId,Long userId,Long catalogId, String title, String summary, String content,
 			String username, String avatar,Timestamp createTime,
@@ -86,8 +93,8 @@ public class EsBlog implements Serializable {
 		this.content = blog.getContent();
 		this.username = user.getUsername();
 		this.avatar = user.getUserimg();
-		this.createTime = (Timestamp) blog.getCreateTime();
-		this.updateTime = (Timestamp) blog.getUpdateTime();
+		this.createTime = new Timestamp(blog.getCreateTime().getTime());
+		this.updateTime = new Timestamp(blog.getUpdateTime().getTime());
 		this.readSize = blog.getReadSize();
 		this.commentSize = blog.getCommentSize();
 		this.voteSize = blog.getVoteSize();
@@ -103,114 +110,11 @@ public class EsBlog implements Serializable {
 		this.content = blog.getContent();
 		this.username = user.getUsername();
 		this.avatar = user.getUserimg();
-		this.createTime = (Timestamp) blog.getCreateTime();
-		this.updateTime = (Timestamp) blog.getUpdateTime();
+		this.createTime = new Timestamp(blog.getCreateTime().getTime());
+		this.updateTime = new Timestamp(blog.getUpdateTime().getTime());
 		this.readSize = blog.getReadSize();
 		this.commentSize = blog.getCommentSize();
 		this.voteSize = blog.getVoteSize();
 		this.tags = blog.getTags();
 	}
- 
-	
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-	public Long getBlogId() {
-		return blogId;
-	}
-
-	public void setBlogId(Long blogId) {
-		this.blogId = blogId;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
- 
-	public String getSummary() {
-		return summary;
-	}
-
-	public void setSummary(String summary) {
-		this.summary = summary;
-	}
- 
-	public Timestamp getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Timestamp createTime) {
-		this.createTime = createTime;
-	}
-
-	public Integer getReadSize() {
-		return readSize;
-	}
-
-	public void setReadSize(Integer readSize) {
-		this.readSize = readSize;
-	}
-
-	public Integer getCommentSize() {
-		return commentSize;
-	}
-
-	public void setCommentSize(Integer commentSize) {
-		this.commentSize = commentSize;
-	}
-
-	public Integer getVoteSize() {
-		return voteSize;
-	}
-
-	public void setVoteSize(Integer voteSize) {
-		this.voteSize = voteSize;
-	}
-
-	public String getTags() {
-		return tags;
-	}
-
-	public String getAvatar() {
-		return avatar;
-	}
-
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
-	}
-
-	public void setTags(String tags) {
-		this.tags = tags;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	@Override
-    public String toString() {
-        return String.format(
-                "EsBlog[blogId=%d, title='%s', summary='%s']",
-                blogId, title, summary);
-    }
 }

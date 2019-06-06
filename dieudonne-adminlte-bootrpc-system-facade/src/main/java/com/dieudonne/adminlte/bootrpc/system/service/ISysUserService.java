@@ -3,9 +3,9 @@ package com.dieudonne.adminlte.bootrpc.system.service;
 
 import java.util.Map;
 
-import com.dieudonne.adminlte.common.mapper.model.SysUser;
 import com.dieudonne.adminlte.common.mapper.service.IBaseService;
 import com.dieudonne.adminlte.common.mapper.util.PageUtil;
+import com.dieudonne.adminlte.model.common.SysUser;
 
 
 /**

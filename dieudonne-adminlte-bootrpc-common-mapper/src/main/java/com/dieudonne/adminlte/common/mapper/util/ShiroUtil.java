@@ -4,7 +4,8 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
 
-import com.dieudonne.adminlte.common.mapper.model.SysUser;
+import com.dieudonne.adminlte.model.common.SysUser;
+
 
 
 /**

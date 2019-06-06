@@ -3,6 +3,7 @@ package com.dieudonne.adminlte.elasticsearch.repository.es;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+import org.springframework.stereotype.Component;
 
 import com.dieudonne.adminlte.bootrpc.elasticsearh.service.model.EsBlog;
 
@@ -12,6 +13,7 @@ import com.dieudonne.adminlte.bootrpc.elasticsearh.service.model.EsBlog;
  * @since 1.0.0 2017年6月8日
  * @author <a href="https://waylau.com">Way Lau</a> 
  */
+@Component
 public interface EsBlogRepository extends ElasticsearchRepository<EsBlog, String> {
 	
     /**

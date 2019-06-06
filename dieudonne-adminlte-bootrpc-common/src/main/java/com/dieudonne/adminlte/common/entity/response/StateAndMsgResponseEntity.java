@@ -1,7 +1,14 @@
 package com.dieudonne.adminlte.common.entity.response;
 
-public class StateAndMsgResponseEntity {
+import java.io.Serializable;
+
+public class StateAndMsgResponseEntity implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** 枚举值 */
 	private int value;
 	

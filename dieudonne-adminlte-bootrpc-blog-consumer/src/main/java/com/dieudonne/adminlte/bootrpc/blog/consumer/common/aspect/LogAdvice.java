@@ -41,7 +41,7 @@ public class LogAdvice {
 	
 	public static final Logger LOG = LoggerFactory.getLogger(LogAdvice.class);
 	
-	@Pointcut("@annotation(com.dieudonne.adminlte.bootrpc.system.consumer.common.anno.Log)")
+	@Pointcut("@annotation(com.dieudonne.adminlte.bootrpc.blog.consumer.common.anno.Log)")
 	public void controllerAspect() {
 		
 	}
